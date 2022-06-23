@@ -25,8 +25,8 @@ export class BusStopInformationService {
         );
     }
 
-    async display_stop_information(stop_code) { // TODO: change to be a stop instead of its code
-        const first_five_buses = await this.get_first_n_buses(stop_code, 5);
+    async display_stop_information(stop) {
+        const first_five_buses = await this.get_first_n_buses(stop.id, 5);
 
         if (!first_five_buses.length) {
             console.log("No buses.")

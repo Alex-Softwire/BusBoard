@@ -21,15 +21,21 @@ export class LocationBusInformationService {
     }
 
     async get_nearest_two_stops_information(postcode) {
-        let first_two_stops = await this.get_first_n_stops(postcode, 2)
-        for (let i = 0; i < first_two_stops.length; i++) {
-            const stop = first_two_stops[i];
-            console.log(`Stop ${i + 1} ${stop.name} (${stop.distance_to.toFixed(1)}m): `);
-            await this.bus_stop_info_service.display_stop_information(stop.id)
-        }
+        try {
+            let nearest_two_stops = await this.get_first_n_stops(postcode, 2)
 
-        // TODO: promise all method - displaying information in parallel
-        // Promise.all(stops).then(this.bus_stop_info_service.display_stop_information)
+            if (!nearest_two_stops.length) {
+                console.error(`No stops close to postcode "${postcode}".`);
+            }
+
+            for (let i = 0; i < nearest_two_stops.length; i++) {
+                const stop = nearest_two_stops[i];
+                console.log(`Stop ${i + 1} ${stop.name} (${stop.distance_to.toFixed(1)}m): `);
+                await this.bus_stop_info_service.display_stop_information(stop);
+            }
+        } catch (e) {
+            console.error(`Error occurred while getting nearest stops to postcode "${postcode}".`);
+        }
 
     }
 }

@@ -9,13 +9,20 @@ export class PostCodeService {
     
     async post_code_to_coordinate(post_code) {
         const url = this.base_url + post_code;
-        const response = await axios.get(url);
         
-        const post_code_information = response.data.result;
-        
-        return new Coordinate(
-            post_code_information.latitude,
-            post_code_information.longitude
-        );
+        return axios.get(url)
+                   .then((response) => {
+                       const post_code_information = response.data.result;
+                               
+                       return new Coordinate(
+                           post_code_information.latitude,
+                           post_code_information.longitude
+                       );
+                   })
+                   .catch((e) => {
+                      console.error(`Error while converting post code "${post_code}" to coordinate.`);
+                      return reject(e);
+                   })
+
     }
 }
