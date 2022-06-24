@@ -19,6 +19,7 @@ const port = 3000
 
 const location_bus_information_service = new LocationBusInformationService();
 
+app.use(express.static('frontend'));
 app.get('/departureBoards/:post_code', async (request, response) => {
     const post_code = request.params.post_code;
     logger.info(`Requesting stops for postcode: ${post_code}.`);
@@ -41,7 +42,7 @@ app.get('/departureBoards/:post_code', async (request, response) => {
 })
 
 app.listen(port, () => {
-    console.log(`App listening on port ${port}`)
+    console.log(`App listening on port ${port}`);
 })
 
 // NW5 1TL

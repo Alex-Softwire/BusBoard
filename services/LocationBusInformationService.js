@@ -36,7 +36,6 @@ export class LocationBusInformationService {
             stops_detailed.push(info);
         }
 
-
         logger.debug(`First detailed stop is: ${stops_detailed}`);
         logger.debug(`Two nearest stops after getting detailed information are: ${stops_detailed.map((it) => it)}`);
 
