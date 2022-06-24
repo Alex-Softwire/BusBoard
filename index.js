@@ -24,19 +24,19 @@ app.get('/departureBoards/:post_code', async (request, response) => {
     logger.info(`Requesting stops for postcode: ${post_code}.`);
 
     try {
-        const info = await location_bus_information_service.get_nearest_two_stops_information(post_code);
+        const info = await location_bus_information_service
+                            .get_nearest_two_stops_information(post_code);
 
         logger.debug(`Stop information (for postcode: ${post_code}) is: ${info}`);
-
-        if (!info.length) {
-            response.status(404);
-        } else {
-            response.status(200);
-            response.send(info);
-        }
+        response.status(200).send(info);
     } catch (e) {
         logger.error(`Error while getting stop information: ${e}`);
-        response.status(500)
+
+        if (e.response) {
+            response.status(e.response.status).send();
+        } else {
+            response.status(500).send();
+        }
     }
 })
 
