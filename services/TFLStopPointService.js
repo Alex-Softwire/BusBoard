@@ -2,7 +2,6 @@ import axios from "axios"
 import {BusStopArrivalModel} from "../models/BusStopArrivalModel.js";
 import {BusStopCoreInformationModel} from "../models/BusStopCoreInformationModel.js";
 import log4js from "log4js";
-import {Util} from "../Util.js";
 
 const logger = log4js.getLogger('TFLStopPointService.js');
 
@@ -19,7 +18,7 @@ export class TFLStopPointService {
                     return new BusStopArrivalModel(
                         bus.lineName,
                         bus.destinationName,
-                        Util.seconds_to_formatted_string(bus.timeToStation)
+                        bus.timeToStation
                     )
                 })
             })
