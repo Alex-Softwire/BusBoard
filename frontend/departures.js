@@ -19,6 +19,7 @@ function get_departures_info(post_code) {
                     document.getElementById("results").innerHTML = `
                         <h2>Results</h2>
                         ${
+                            (data.length) ? (
                                 data.map((stop) => {
                                     return `
                                     <h3>${stop.core_information.name} (Distance ${stop.core_information.distance_to.toFixed(1)}m)</h3>
@@ -31,11 +32,12 @@ function get_departures_info(post_code) {
                                                 }).join("")
                                             }
                                         </ul>`
-                                        ): "No buses."
+                                        ): "No buses found."
                                       }
                                 `;
                                 }).join("")
-                            }
+                            ) : "No bus stops found."
+                        }
                     `;
                 break;
             case 404:
