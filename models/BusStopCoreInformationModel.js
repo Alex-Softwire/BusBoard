@@ -3,5 +3,6 @@ export class BusStopModel {
         this.id = id;
         this.name = name;
         this.distance_to = distance_to;
+
     }
 }
