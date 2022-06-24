@@ -1,6 +1,9 @@
 import axios from "axios"
 import {BusStopArrivalModel} from "../models/BusStopArrivalModel.js";
-import {BusStopModel} from "../models/BusStopModel.js";
+import {BusStopCoreInformationModel} from "../models/BusStopCoreInformationModel.js";
+import log4js from "log4js";
+
+const logger = log4js.getLogger('TFLStopPointService.js');
 
 export class TFLStopPointService {
     constructor() {
@@ -27,10 +30,12 @@ export class TFLStopPointService {
     async get_bus_stops_around_coordinate(coordinate, radius=500) {
         const url = this.base_url +"?lat="+coordinate.latitude + "&lon="+coordinate.longitude + "&stopTypes=NaptanPublicBusCoachTram&radius="+radius
 
+        logger.info("Requesting bus stops around coordinate ")
+
         return axios.get(url)
                    .then((response) => {
                        return response.data.stopPoints.map((stop) => {
-                           return new BusStopModel(
+                           return new BusStopCoreInformationModel(
                                stop.id,
                                stop.commonName,
                                stop.distance

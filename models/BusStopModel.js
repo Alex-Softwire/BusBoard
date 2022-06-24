@@ -1,7 +1,6 @@
 export class BusStopModel {
-    constructor(id, name, distance_to) {
-        this.id = id;
-        this.name = name;
-        this.distance_to = distance_to;
+    constructor(core_information, arrivals) {
+        this.core_information = core_information;
+        this.arrivals = arrivals;
     }
 }
