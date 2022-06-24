@@ -19,10 +19,6 @@ export class PostCodeService {
                            post_code_information.longitude
                        );
                    })
-                   .catch((e) => {
-                      console.error(`Error while converting post code "${post_code}" to coordinate.`);
-                      return reject(e);
-                   })
 
     }
 }

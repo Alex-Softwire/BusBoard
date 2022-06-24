@@ -1,6 +1,8 @@
 import { TFLStopPointService } from "./TFLStopPointService.js";
-import { Util } from "./Util.js";
+import {BusStopModel} from "../models/BusStopModel.js";
+import log4js from "log4js";
 
+const logger = log4js.getLogger('BusStopInformationService.js');
 
 export class BusStopInformationService {
     constructor() {
@@ -14,24 +16,19 @@ export class BusStopInformationService {
     async get_first_n_buses(stop_code, n) {
         let buses = await this.stop_point_service.get_bus_stop_arrivals(stop_code);
         this.sort_buses_by_time_to_station(buses);
+
+        logger.debug(`Next bus arrivals at stop code "${stop_code}" are: ${buses}`);
+
         return buses.slice(0, n);
     }
 
-    display_bus_information(bus) {
-        console.log(
-            `Line: ${bus.line}, ` +
-            `Destination: ${bus.destination}, ` +
-            `ETA: ${Util.seconds_to_formatted_string(bus.eta)}.`
-        );
-    }
-
-    async display_stop_information(stop) {
+    async get_stop_information(stop) {
         const first_five_buses = await this.get_first_n_buses(stop.id, 5);
+        logger.debug(`First five buses (for stop ${stop.name}) are: ${first_five_buses}`);
 
-        if (!first_five_buses.length) {
-            console.log("No buses.")
-        }
-
-        first_five_buses.forEach(this.display_bus_information);
+        return new BusStopModel(
+            stop,
+            first_five_buses
+        );
     }
 }
