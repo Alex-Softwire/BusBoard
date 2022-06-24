@@ -18,19 +18,24 @@ function get_departures_info(post_code) {
 
                     document.getElementById("results").innerHTML = `
                         <h2>Results</h2>
+                    
                         ${
                                 data.map((stop) => {
                                     return `
+                                    
                                     <h3>${stop.core_information.name} (Distance ${stop.core_information.distance_to.toFixed(1)}m)</h3>
                                    ${
                                         (stop.arrivals.length) ? (`
-                                        <ul>
-                                            ${
-                                                stop.arrivals.map((bus) => {
-                                                    return `<li>${seconds_to_hh_mm_ss(bus.eta)}: ${bus.line} to ${bus.destination}</li>`
-                                                }).join("")
-                                            }
-                                        </ul>`
+                                            <table>
+                                            <tr><th>  Time to Arrival  </th><th>  Bus Line  </th><th>  Bus Destination  </th></tr>       
+                                                ${
+                                                    stop.arrivals.map((bus) => {
+                                                        return `
+                                                            <tr><td>${seconds_to_hh_mm_ss(bus.eta)}</td> <td>${bus.line}</td> <td>${bus.destination}</td></tr>
+                                                        `
+                                                    }).join("")
+                                                }
+                                            </table>`
                                         ): "No buses."
                                       }
                                 `;

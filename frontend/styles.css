@@ -1,0 +1,27 @@
+body {
+    background-color: crimson;
+    font-family: "Bauhaus 93";
+}
+
+#bertie {
+    width: 60%;
+}
+
+table, th, td {
+    padding: 2px;
+    border: 1px blue;
+}
+
+th {
+    text-align: left;
+    background-color: deeppink;
+}
+
+tr:nth-child(odd) {
+    background-color: aqua;
+    bord
+}
+
+tr:nth-child(even) {
+    background-color: limegreen;
+}

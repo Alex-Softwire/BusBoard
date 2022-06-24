@@ -20,6 +20,7 @@ const port = 3000
 const location_bus_information_service = new LocationBusInformationService();
 
 app.use(express.static('frontend'));
+app.use('/history', express.static('frontend/history.html'))
 app.get('/departureBoards/:post_code', async (request, response) => {
     const post_code = request.params.post_code;
     logger.info(`Requesting stops for postcode: ${post_code}.`);
