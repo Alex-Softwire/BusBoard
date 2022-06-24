@@ -19,7 +19,6 @@ th {
 
 tr:nth-child(odd) {
     background-color: aqua;
-    bord
 }
 
 tr:nth-child(even) {
