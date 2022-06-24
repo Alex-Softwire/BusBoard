@@ -21,7 +21,7 @@ function get_departures_info(post_code) {
                         ${
                                 data.map((stop) => {
                                     return `
-                                    <h3>${stop.core_information.name} (Distance ${stop.core_information.distance_to.toFixed(2)} m)</h3>
+                                    <h3>${stop.core_information.name} (Distance ${stop.core_information.distance_to.toFixed(1)}m)</h3>
                                    ${
                                         (stop.arrivals.length) ? (`
                                         <ul>
